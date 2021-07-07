@@ -51,8 +51,8 @@ The following fields are required in the header section of your request:<br>
 
 | Name | Type | Max. length | Description |
 | ---- | ---- | ----------- | ----------- |
-| **verificationReference** | String     | 100 | VASP's internal reference for the transaction. |
-| **userReference** | String | 100 | VASP's internal reference for the user. |
+| **verificationReference** | String     | 100 | VASP's chosen ID for the transaction. |
+| **userReference** | String | 100 | VASP's chosen ID for the user. |
 | **locale** | String | 5 | Renders content in the specified language. |
 | **successUrl** | String | 2047 | Redirects to this URL after a successful transaction. |
 | **errorUrl** | String | 255 | Redirects user to this URL after an unsuccessful transaction. |
@@ -119,7 +119,7 @@ Successful requests will return HTTP status code ```200 OK```  along with a JSON
 | Name | Type | Max. length | Description |
 | ---- | ---- | ----------- | ----------- |
 | timestamp | String     | 24 | Timestamp (UTC) of the response. Format: YYYY-MM-DDThh:mm:ss.SSSZ |
-| verificationId | String     | 36  | ID of the verification process.|
+| verificationReference | String     | 100  | VASP's chosen ID for the transaction.|
 | redirectUrl | String     |  | URL used to load the ID Verification client.|
 
 
@@ -136,12 +136,12 @@ Content-Length: 987
 User-Agent: Vasp Name or Identifier/1.0.0
 Authorization: Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 {
-  "verificationReference" : "transaction_1",
-  "userReference" : "1234",
+  "verificationReference" : "6a4d2c81-ada4-498b-94fe-449335cebd01",
+  "userReference" : "5172ad1b-81ec-4a02-8e75-544fd8459888",
   "locale" : "en",
   "successUrl" : "https://www.vasp1.com/success",
   "errorUrl" : "https://www.vasp1.com/error",
-  "callbackUrl" : "https://www.vasp1.com/callback?userReference=1234",
+  "callbackUrl" : "https://www.vasp1.com/users/5172ad1b-81ec-4a02-8e75-544fd8459888/callback",
 }
 ```
 
@@ -150,7 +150,7 @@ Authorization: Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```json=
 {
   "timestamp": "2018-07-03T08:23:12.494Z",
-  "verificationId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "verificationReference": "6a4d2c81-ada4-498b-94fe-449335cebd01",
   "redirectUrl": "https://sandbox.private.network/web/v1/app?verificationId=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
@@ -184,7 +184,7 @@ To request the verification process status the endpoint must be called specifyin
 | Name | Type | Max. length | Description |
 | ---- | ---- | ----------- | ----------- |
 | timestamp | String     |  | Timestamp (UTC) of the response. Format: YYYY-MM-DDThh:mm:ss.SSSZ |
-| verificationId | String     | 36  | Transaction reference number |
+| verificationReference | String     | 100  |  VASP's chosen ID for the transaction. |
 | status | String     |   | Possible states: PENDING, DONE, FAILED |
 
 <br>
@@ -194,7 +194,7 @@ To request the verification process status the endpoint must be called specifyin
 ### Sample Request
 
 ```json=
-GET https://sandbox.privado.network/api/v1/verifications/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx HTTP/1.1
+GET https://sandbox.privado.network/api/v1/verifications/6a4d2c81-ada4-498b-94fe-449335cebd01 HTTP/1.1
 Accept: application/json
 User-Agent: Vasp Name or Identifier/1.0.0
 Authorization: Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -205,7 +205,7 @@ Authorization: Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```json=
 {
     "timestamp": "2019-01-01T16:23:55.039Z",
-    "verificationId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "verificationReference": "6a4d2c81-ada4-498b-94fe-449335cebd01",
     "status": "DONE"
 }
 ```
