@@ -186,6 +186,7 @@ To request the verification process status the endpoint must be called specifyin
 | timestamp | String     |  | Timestamp (UTC) of the response. Format: YYYY-MM-DDThh:mm:ss.SSSZ |
 | verificationReference | String     | 100  |  VASP's chosen ID for the transaction. |
 | status | String     |   | Possible states: PENDING, DONE, FAILED |
+| rejectReason | String     |   | Detail in case of FAILED validation |
 
 <br>
 
