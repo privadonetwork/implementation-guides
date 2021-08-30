@@ -16,7 +16,7 @@ API calls are protected using [HTTP Basic Authentication](https://tools.ietf.org
 
 Sandbox environment for privado network APIs:
 
-```https://sandbox.privado.network/api/v1```
+```https://api.sandbox.privadoid.com/api/v1```
 
 <br>
 
@@ -129,7 +129,7 @@ Successful requests will return HTTP status code ```200 OK```  along with a JSON
 ### Sample Request
 
 ```JSON=
-POST https://sandbox.privado.network/api/v1/verifications/ HTTP/1.1
+POST https://api.sandbox.privadoid.com/api/v1/verifications/ HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Content-Length: 987
@@ -195,7 +195,7 @@ To request the verification process status the endpoint must be called specifyin
 ### Sample Request
 
 ```json=
-GET https://sandbox.privado.network/api/v1/verifications/6a4d2c81-ada4-498b-94fe-449335cebd01 HTTP/1.1
+GET https://api.sandbox.privadoid.com/api/v1/verifications/6a4d2c81-ada4-498b-94fe-449335cebd01 HTTP/1.1
 Accept: application/json
 User-Agent: Vasp Name or Identifier/1.0.0
 Authorization: Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
