@@ -54,8 +54,6 @@ The following fields are required in the header section of your request:<br>
 | **verificationReference** | String     | 100 | VASP's chosen ID for the transaction. |
 | **userReference** | String | 100 | VASP's chosen ID for the user. |
 | **locale** | String | 5 | Renders content in the specified language. |
-| **successUrl** | String | 2047 | Redirects to this URL after a successful transaction. |
-| **errorUrl** | String | 255 | Redirects user to this URL after an unsuccessful transaction. |
 | **callbackUrl** | String | 255 | Call this URL upon completion.
 
 <br>
@@ -119,8 +117,7 @@ Successful requests will return HTTP status code ```200 OK```  along with a JSON
 | Name | Type | Max. length | Description |
 | ---- | ---- | ----------- | ----------- |
 | timestamp | String     | 24 | Timestamp (UTC) of the response. Format: YYYY-MM-DDThh:mm:ss.SSSZ |
-| verificationReference | String     | 100  | VASP's chosen ID for the transaction.|
-| redirectUrl | String     |  | URL used to load the ID Verification client.|
+| url | String     |  | URL used to load the ID Verification client.|
 
 
 <br>
@@ -139,8 +136,6 @@ Authorization: Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   "verificationReference" : "6a4d2c81-ada4-498b-94fe-449335cebd01",
   "userReference" : "5172ad1b-81ec-4a02-8e75-544fd8459888",
   "locale" : "en",
-  "successUrl" : "https://www.vasp1.com/success",
-  "errorUrl" : "https://www.vasp1.com/error",
   "callbackUrl" : "https://www.vasp1.com/users/5172ad1b-81ec-4a02-8e75-544fd8459888/callback",
 }
 ```
@@ -150,8 +145,7 @@ Authorization: Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```json=
 {
   "timestamp": "2018-07-03T08:23:12.494Z",
-  "verificationReference": "6a4d2c81-ada4-498b-94fe-449335cebd01",
-  "redirectUrl": "https://sandbox.private.network/web/v1/app?verificationId=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  "url": "https://wizard.sandbox.privateid.com/web/v1/app?verificationId=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
 <br>
