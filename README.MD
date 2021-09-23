@@ -10,6 +10,6 @@ The implementation guides below will assist you with integrating Privado Network
 ---
 ## Contact
 
-If you have any questions regarding our implementation guides, please contact Jumio Support at [support@privado.network](mailto://support@privado.network)
+If you have any questions regarding our implementation guides, please contact Privado Network Support at [support@privado.network](mailto://support@privado.network)
 
 
