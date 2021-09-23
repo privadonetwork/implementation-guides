@@ -1,4 +1,4 @@
-#  Privado Network KYC API Implementation Guide
+#  Privado Network API Implementation Guide
 
 This is a reference manual for the Privado Network KYC API. It describes how to initialize a verification process and onboard users into the network. Also offers ways to check the status of the transactions.
 
