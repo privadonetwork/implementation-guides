@@ -92,10 +92,6 @@ window.addEventListener('message', function (e) {
 })
 ```
 
-## Demo
-
-A demo using iframe can be checked inside the project's `example` folder.
-
 ## Built with
 
 - [Create React App (CRA)](https://github.com/facebook/create-react-app).
