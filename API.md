@@ -5,7 +5,7 @@ This is a reference manual for the Privado Network KYC API. It describes how to 
 <br>
 
 ## Authentication and encryption
-API calls are protected using [HTTP Basic Authentication](https://tools.ietf.org/html/rfc7617). Your Basic Auth credentials are constructed using your API token as the user-id and your API secret as the password.
+API calls are protected using [HTTP Basic Authentication](https://tools.ietf.org/html/rfc7617). Your Basic Auth credentials are constructed using your API token as the user-id and your API secret as the password. The API credentials can be obtained in the settings area of Privado Network Admin website.
 
 |⚠️ Never share your API token, API secret, or Basic Auth credentials with *anyone* — not even Privado Network Support.
 |:----------|
@@ -26,7 +26,7 @@ The [TLS Protocol](https://tools.ietf.org/html/rfc5246) is required to securely 
 
 # Initiate KYC Process
 
-Call the RESTful API POST endpoint **/verifications** with a JSON object containing the properties described below to start a verification process.
+Call the RESTful API POST endpoint **/verifications/start** with a JSON object containing the properties described below to start a verification process.
 
 ## Request headers
 
@@ -53,10 +53,13 @@ The following fields are required in the header section of your request:<br>
 | ---- | ---- | ----------- | ----------- |
 | **verificationReference** | String     | 100 | VASP's chosen ID for the transaction. |
 | **userReference** | String | 100 | VASP's chosen ID for the user. |
-| **locale** | String | 5 | Renders content in the specified language. |
+| **locale** | String | 5 | Renders content in the specified language. *|
 | **callbackUrl** | String | 255 | Call this URL upon completion.
 
+\* currently locale is only applied to the verification process
+
 <br>
+
 
 ## Supported `locale` values
 Hyphenated combination of [ISO 639-1:2002 alpha-2](https://en.wikipedia.org/wiki/ISO_639-1) language code plus [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country (where applicable).
@@ -117,7 +120,7 @@ Successful requests will return HTTP status code ```200 OK```  along with a JSON
 | Name | Type | Max. length | Description |
 | ---- | ---- | ----------- | ----------- |
 | timestamp | String     | 24 | Timestamp (UTC) of the response. Format: YYYY-MM-DDThh:mm:ss.SSSZ |
-| url | String     |  | URL used to load the ID Verification client.|
+| url | String     |  | URL used to load the ID verification wizard.|
 
 
 <br>
@@ -126,7 +129,7 @@ Successful requests will return HTTP status code ```200 OK```  along with a JSON
 ### Sample Request
 
 ```JSON=
-POST https://api.sandbox.privadoid.com/api/v1/verifications/ HTTP/1.1
+POST https://api.sandbox.privadoid.com/api/v1/verifications/start HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Content-Length: 987
@@ -145,14 +148,14 @@ Authorization: Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```json=
 {
   "timestamp": "2018-07-03T08:23:12.494Z",
-  "url": "https://wizard.sandbox.privateid.com/web/v1/app?verificationId=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  "url": "https://wizard.internal.privadoid.com?vasp=00000000-0000-0000-0000-000000000001\u0026token=df9bc110-f5a4-44cb-8ad1-900e0baad37b"
 }
 ```
 <br>
 
 # ID Verification Process Status
 
-Call the RESTful API GET endpoint **/verifications** to ask the status of a verification process.
+Call the RESTful API GET endpoint **/verifications/:verificationRefrence/status** to ask the status of a verification process.
 
 ## Request headers
 
@@ -189,7 +192,7 @@ To request the verification process status the endpoint must be called specifyin
 ### Sample Request
 
 ```json=
-GET https://api.sandbox.privadoid.com/api/v1/verifications/6a4d2c81-ada4-498b-94fe-449335cebd01 HTTP/1.1
+GET https://api.sandbox.privadoid.com/v1/verifications/6a4d2c81-ada4-498b-94fe-449335cebd01/status HTTP/1.1
 Accept: application/json
 User-Agent: Vasp Name or Identifier/1.0.0
 Authorization: Basic xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
