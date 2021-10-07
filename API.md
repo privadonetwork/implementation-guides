@@ -16,7 +16,7 @@ API calls are protected using [HTTP Basic Authentication](https://tools.ietf.org
 
 Sandbox environment for privado network APIs:
 
-```https://api.sandbox.privadoid.com/api/v1```
+```https://api.sandbox.privadoid.com/v1```
 
 <br>
 
@@ -129,7 +129,7 @@ Successful requests will return HTTP status code ```200 OK```  along with a JSON
 ### Sample Request
 
 ```JSON=
-POST https://api.sandbox.privadoid.com/api/v1/verifications/start HTTP/1.1
+POST https://api.sandbox.privadoid.com/v1/verifications/start HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Content-Length: 987
